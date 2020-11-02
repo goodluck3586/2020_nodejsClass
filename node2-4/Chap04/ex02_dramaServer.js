@@ -10,13 +10,13 @@ var dramaList = [
 //#region 1. get 방식 처리
 // var url = require('url');
 // var server = http.createServer(function(req, res){
-//     console.log('req.url : ', req.url);
+//     console.log('req.url : ', req.url);     // title=스타트업&actor=수지, 남주혁
 
 //     var parsedUrl = url.parse(req.url);     // url parsing
 //     console.log('parsedUrl ', parsedUrl);
 
 //     var qs = querystring.parse(parsedUrl.query);  // querystring parsing
-//     console.log('qs ', qs);
+//     console.log('qs ', qs);     // {'title': '스타트업', 'actor': '수지, 남주혁'} 
 
 //     // 드라마 목록에 데이터 추가
 //     if(qs.title && qs.actor){
@@ -35,7 +35,6 @@ var dramaList = [
 
 function showDramaListUsingGet(res){
     res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'});
-
     res.write(`<html><body><h1>My Favorite Drama</h1><ul>`);
 
     for(var i=0; i<dramaList.length; i++){
@@ -58,7 +57,7 @@ var server = http.createServer(function(req, res){
     if(req.method.toLowerCase() === 'post'){
         addDramaItem(req, res);
     }else{
-        showDramaListUsingPost(res);
+        showDramaListUsingPost(res);    // get 요청 처리
     }
 }).listen(8080, function(){
     console.log('8080 포트에서 대기중');
@@ -74,7 +73,7 @@ function addDramaItem(req, res){
 
     req.on('end', function(){
         var qs = querystring.parse(body);  // title=조승우&actor=비밀의 숲
-        console.log('qs: ', qs)     //{ title: '조승우', actor: '비밀의 숲' }
+        console.log('qs: ', qs)     // { title: '조승우', actor: '비밀의 숲' }
         if(qs.title && qs.actor){
             dramaList.push({title: qs.title, actor: qs.actor});
         }
