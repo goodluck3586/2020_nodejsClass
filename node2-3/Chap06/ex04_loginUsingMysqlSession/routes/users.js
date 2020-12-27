@@ -7,8 +7,7 @@ router.post('/login', (req, res)=>{
   if(req.body.email && req.body.pwd){
     console.log('req.body: ', req.body);
     model.selectUser(req.body.email, (results)=>{
-      //res.send(results[0]);
-      console.log('results: ', results);
+      //res.send(results);
       console.log(req.body.email, results[0].email, req.body.pwd, results[0].pwd)
       if(req.body.email === results[0].email && req.body.pwd === results[0].pwd){
         //res.send('<h1>로그인 성공</h1>')

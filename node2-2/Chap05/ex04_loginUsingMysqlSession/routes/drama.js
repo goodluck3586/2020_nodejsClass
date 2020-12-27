@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var model = require('../models/dramaDAO');
 
+// localhost:3000/drama/
 router.get('/', function(req, res) {
   model.selectDrama((results)=>{
     //res.send(results)
@@ -20,6 +21,7 @@ router.post('/', function(req, res){
   }
 })
 
+// localhost:3000/drama/update/1
 router.post('/update/:id', function(req, res){
   //res.send(`/update req.params.id: ${req.params.id}`);
   if(req.body.title && req.body.actor){
@@ -31,6 +33,7 @@ router.post('/update/:id', function(req, res){
   }
 })
 
+// localhost:3000/drama/delete/12
 router.get('/delete/:id', function(req, res){
   //res.send(`/delete req.params.id: ${req.params.id}`);
   model.deleteDrama(req.params.id, ()=>res.redirect('/drama'))

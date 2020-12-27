@@ -25,10 +25,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.png')))
 
-//#region express-mysql-session
+//#region express-session
 var options = {
   host: process.env.DB_HOST,
-  port: 3306,
+  port: process.env.DB_PORT,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DATABASE

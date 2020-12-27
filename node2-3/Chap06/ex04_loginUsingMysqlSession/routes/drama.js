@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var model = require('../models/dramaDAO');
 
+// /drama/
 router.get('/', function(req, res) {
   model.selectDrama((results)=>{
     //res.send(results)

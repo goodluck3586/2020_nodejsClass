@@ -1,12 +1,12 @@
 var connection = require('./db')
 
-// [{"id":1,"title":"나의 아저씨","actor":"아이유, 이선균"},{"id":2,"title":"미스터 션샤인","actor":"이병헌, 김태리"},{"id":11,"title":"스타트업","actor":"수지, 남주혁"}]
 exports.selectDrama = function(cb){
     connection.query('SELECT * FROM drama', function (error, results, fields) {
         if(error){
             console.log(error);
         }else{
-            cb(results);
+            cb(results);  // results : select된 데이터가 객체 형태로 들어있음.
+            // [{title: '나의 아저씨, actor: '아이유, 이선균'}, {title: '나의 아저씨, actor: '아이유, 이선균'}]
         }
     });
 }
@@ -45,5 +45,3 @@ exports.deleteDrama = function(id, cb){
         }
     })
 }
-
-

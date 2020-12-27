@@ -25,6 +25,26 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')))
 
+//#region express-mysql-session
+var options = {
+  host: process.env.DB_HOST,
+  port: 3306,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DATABASE
+};
+
+var sessionStore = new MySQLStore(options);
+
+app.use(session({
+  HttpOnly:true,
+  secret: process.env.SESSION_SECRET,
+  store: sessionStore,
+  resave: false,
+  saveUninitialized: true     // 세션이 필요하기 전까지는 세션을 구동시키지 않는다(true)
+}));
+//#endregion
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/drama', dramaRouter);
